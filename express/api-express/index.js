@@ -13,12 +13,11 @@ app.get('/', function (req, res) {
 app.get('/lista', function (req, res) {
   connection.query('SELECT * FROM usuario ', function(err, rows, fields) {
     let response= new Object;
+    response["total"]=0;
+    response["lista"]=new Array();
     if (rows.length>0) {
       response["lista"]=rows;
       response["total"]=rows.length;
-    }else{
-      response["lista"]=new Array();
-      response["total"]=0;
     }
     res.json(response);
   });
