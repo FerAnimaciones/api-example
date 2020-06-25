@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  url_api_php:"http://localhost/api-example/api/",
+  url_api_php:"http://localhost/api-example/api/index.php/welcome/",
   url_api_expres:"http://localhost:3000/",
 };
 
