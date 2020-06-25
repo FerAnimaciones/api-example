@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { BackendApiService } from "./services/backend-api.service";
-export interface uSUARIO {
+export interface Usuario {
   idusuario: number;
   usuario: string;
   contraseña: string;
@@ -12,4 +12,18 @@ export interface uSUARIO {
 })
 export class AppComponent {
   title = 'sistema';
+  public Usuarios:Usuario[]=[];
+  constructor(
+    private api: BackendApiService,
+  ) {
+    this.api.getData("lista")
+    .subscribe(
+      response => {
+        this.Usuarios=response.lista;
+      },
+      err => {
+        console.log(err);
+      }
+    );
+  }
 }
