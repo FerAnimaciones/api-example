@@ -29,11 +29,14 @@ class Welcome extends CI_Controller {
 		HeaderJson();
 		switch ($this->input->method()) {
 			case 'get':
-
+			$response["total"]=0;
+			$response["lista"]=$this->Usuario->GetUsers();
+			if ($response["lista"]) {
+				$response["total"]=count($response["lista"]);
+			}
+			echo json_encode($response);
 			break;
-
 			default:
-
 			break;
 		}
 	}

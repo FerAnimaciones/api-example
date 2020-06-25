@@ -13,7 +13,7 @@ class Usuario extends CI_Model {
   public function GetUsers($v="")
   {
     $db_connection = $this->load->database("default", TRUE);
-    $query=$db_connection->query("select * from usuarios oder by idusuario asc");
+    $query=$db_connection->query("select * from usuario order by idusuario asc");
     if ($query->num_rows() > 0) {
       return  $query->result();
     } else {
@@ -23,7 +23,7 @@ class Usuario extends CI_Model {
   public function GetUser($user="")
   {
     $db_connection = $this->load->database("default", TRUE);
-    $query=$db_connection->query("select * from usuarios where idusuarios = $user");
+    $query=$db_connection->query("select * from usuario where idusuario = $user");
 
     if ($query->num_rows() > 0) {
       return  $query->row();
