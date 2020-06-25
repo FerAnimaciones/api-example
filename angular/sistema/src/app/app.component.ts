@@ -3,7 +3,7 @@ import { BackendApiService } from "./services/backend-api.service";
 export interface Usuario {
   idusuario: number;
   usuario: string;
-  contraseña: string;
+  contrasena: string;
 }
 @Component({
   selector: 'app-root',
