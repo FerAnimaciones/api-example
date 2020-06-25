@@ -1,7 +1,7 @@
 var express = require('express');
 var app = express();
 var mysql = require('mysql');
-var cors = require('cors');
+var cors = require('cors'); // npm install cors
 const connection = mysql.createConnection({
   host     : 'localhost',
   user     : 'root',
