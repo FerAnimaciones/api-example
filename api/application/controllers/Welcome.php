@@ -19,7 +19,7 @@ class Welcome extends CI_Controller {
 	public function __construct() {
 		parent::__construct();
 		$this->load->model(array('Usuario'));
-		$this->load->helper(array('url','headers','auth'));
+		$this->load->helper(array('url','headers'));
 	}
 	public function index()
 	{
