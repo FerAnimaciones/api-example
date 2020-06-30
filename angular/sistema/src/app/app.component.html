@@ -297,22 +297,5 @@
   </a>
 </div>
 <div class="content" role="main">
-  <table>
-    <thead>
-      <tr>
-        <th>id</th>
-        <th>Usuario</th>
-        <th>Contraseña</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let usuario of Usuarios; index as i">
-        <td>{{usuario.idusuario}}</td>
-        <td>{{usuario.usuario}}</td>
-        <td>{{usuario.contrasena}}</td>
-      </tr>
-    </tbody>
-  </table>
-
+  <router-outlet></router-outlet>
 </div>
-<router-outlet></router-outlet>
