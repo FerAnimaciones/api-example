@@ -1,1 +1,14 @@
-<p>formulario works!</p>
+<form  class="pure-form pure-form-stacked" (keydown.enter)="$event.preventDefault()" [formGroup]="form"  (ngSubmit)="submit()" enctype="multipart/form-data" method="post" autocomplete="off">
+    <fieldset>
+        <legend>Formulario Simple</legend>
+        <div class="">
+          <label>Usuario</label>
+          <input formControlName="usuario" type="text" placeholder="Ingresar usuario" />
+        </div>
+        <div class="">
+          <label>Contraseña</label>
+          <input formControlName="contrasena" type="text" placeholder="Contraseña" />
+        </div>
+        <button type="submit" class="pure-button pure-button-primary">Registrar</button>
+    </fieldset>
+</form>

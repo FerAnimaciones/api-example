@@ -1,5 +1,5 @@
 <h2>Listado</h2>
-<button class="pure-button">Agregar</button> <br><br>
+<button [routerLink]="'formulario'" class="pure-button">Agregar</button> <br><br>
 <table class="pure-table">
   <thead>
     <tr>
@@ -15,7 +15,7 @@
       <td>{{usuario.usuario}}</td>
       <td>{{usuario.contrasena}}</td>
       <td>
-        <button class="pure-button">Editar</button> -
+        <button [routerLink]="['formulario/',usuario.idusuario]" class="pure-button">Editar</button> -
         <button class="pure-button">Eliminar</button>
       </td>
     </tr>
