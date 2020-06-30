@@ -13,6 +13,7 @@ export class FormularioComponent implements OnInit {
     usuario:new FormControl(""),
     contrasena:new FormControl(""),
   });
+  public form_mode=0;
   constructor(
     public api:BackendApiService,
     private activatedRoute: ActivatedRoute,
@@ -22,9 +23,10 @@ export class FormularioComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params => {
       if(!params || Object.keys(params).length === 0){
-
+        this.form_mode=0;
       }else{
-        console.log(params);
+        this.form_mode=1;
+        this.form.disable();
         this.api.getData("usuario/"+params["id"])
         .subscribe(
           data => {
@@ -33,6 +35,11 @@ export class FormularioComponent implements OnInit {
               usuario:data.usuario.usuario,
               contrasena:data.usuario.contrasena,
             });
+            this.form.enable();
+          },
+          err => {
+            this.form.enable();
+            console.log(err);
           }
         );
       }
@@ -40,6 +47,7 @@ export class FormularioComponent implements OnInit {
   }
   submit():void{
     this.form.disable();
+    let url="";
     this.api.postDataJson("save",this.form.getRawValue())
     .subscribe(
       data => {
