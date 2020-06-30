@@ -1,4 +1,4 @@
-<form  [formGroup]="form" class="pure-form pure-form-stacked">
+<form  class="pure-form pure-form-stacked" (keydown.enter)="$event.preventDefault()" [formGroup]="form"  (ngSubmit)="submit()" enctype="multipart/form-data" method="post" autocomplete="off">
     <fieldset>
         <legend>Formulario Simple</legend>
         <div class="">

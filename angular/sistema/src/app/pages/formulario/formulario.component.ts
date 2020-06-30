@@ -16,5 +16,17 @@ export class FormularioComponent implements OnInit {
 
   ngOnInit(): void {
   }
+  submit():void{
+    this.form.disable();
+    this.api.postDataJson("save",this.form.getRawValue())
+    .subscribe(
+      data => {
 
+      },
+      err => {
+        this.form.enable();
+        console.log(err);
+      }
+    );
+  }
 }
