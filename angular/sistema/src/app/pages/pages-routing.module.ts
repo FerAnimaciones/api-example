@@ -8,6 +8,7 @@ const routes: Routes = [
     { path: '', component: DashboardComponent, children: [
         { path: '',component: ListaComponent },
         { path: 'formulario',component: FormularioComponent },
+        { path: 'formulario/:id',component: FormularioComponent },
       ],
     }
 ];
