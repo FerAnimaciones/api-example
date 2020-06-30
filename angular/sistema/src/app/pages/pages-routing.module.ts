@@ -5,8 +5,9 @@ import { DashboardComponent } from 'app/pages/dashboard/dashboard.component';
 import { ListaComponent } from 'app/pages/lista/lista.component';
 import { FormularioComponent } from 'app/pages/formulario/formulario.component';
 const routes: Routes = [
-    { path: '', component: ListaComponent, children: [
-        { path: 'formulario',component: FormularioComponent  },
+    { path: '', component: DashboardComponent, children: [
+        { path: '',component: ListaComponent },
+        { path: 'formulario',component: FormularioComponent },
       ],
     }
 ];
