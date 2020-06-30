@@ -23,7 +23,7 @@ export class FormularioComponent implements OnInit {
     this.api.postDataJson("save",this.form.getRawValue())
     .subscribe(
       data => {
-
+        this.form.enable();
       },
       err => {
         this.form.enable();
