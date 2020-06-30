@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl,AbstractControl,Validators,FormArray,ValidatorFn,ValidationErrors } from '@angular/forms';
-
+import { BackendApiService } from "app/services/backend-api.service";
 @Component({
   selector: 'app-formulario',
   templateUrl: './formulario.component.html',
@@ -12,7 +12,9 @@ export class FormularioComponent implements OnInit {
     usuario:new FormControl(""),
     contrasena:new FormControl(""),
   });
-  constructor() { }
+  constructor(
+    public api:BackendApiService,
+  ) { }
 
   ngOnInit(): void {
   }
