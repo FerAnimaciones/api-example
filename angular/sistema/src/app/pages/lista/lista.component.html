@@ -15,7 +15,7 @@
       <td>{{usuario.usuario}}</td>
       <td>{{usuario.contrasena}}</td>
       <td>
-        <button class="pure-button">Editar</button> -
+        <button [routerLink]="['formulario/',usuario.idusuario]" class="pure-button">Editar</button> -
         <button class="pure-button">Eliminar</button>
       </td>
     </tr>
