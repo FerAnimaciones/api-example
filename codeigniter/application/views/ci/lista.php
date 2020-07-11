@@ -7,7 +7,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<div class="row">
 		<div class="col-md-12">
 			<h2>LISTA</h2>
-			<div>
+			<div class="table-container">
 				<table class="table">
 					<thead>
 						<tr>

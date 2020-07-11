@@ -9,7 +9,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			<h2>LISTA</h2>
 			<div id="app" v-cloak>
 				<h4>{{message}}</h4>
-				<div class="table-container">
+				<div v-if="modo==0" class="table-container">
+					<button type="button"  v-on:click="formulario" class="btn btn-primary">FORMULARIO</button>
+					<br><br>
 					<table class="table">
 						<thead>
 							<tr>
@@ -24,6 +26,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							</tr>
 						</tbody>
 					</table>
+				</div>
+				<div v-if="modo>=1">
+					<form autocomplete="off"  method="post"  @submit="save" ref="form">
+						<div class="form-group">
+							<label for="exampleInputEmail1">Usuario</label>
+							<input  v-model="form.usuario" type="text" class="form-control" id="exampleInputEmail1">
+						</div>
+						<div class="form-group">
+							<label for="exampleInputPassword1">Contraseña</label>
+							<input v-model="form.password" type="password" class="form-control" id="exampleInputPassword1">
+						</div>
+						<button type="submit" class="btn btn-primary">GUARDAR</button>
+					</form>
 				</div>
 			</div>
 		</div>
@@ -40,6 +55,11 @@ var app = new Vue({
 	data: {
 		message: 'Prueba',
 		lista:[],
+		modo:0,
+		form:{
+			usuario:"",
+			password:"",
+		}
 	},
 	created: function (){
 		this.loadLista();
@@ -59,6 +79,13 @@ var app = new Vue({
 			.then(function () {
 
 			});
+		},
+		formulario:function() {
+			this.modo=1;
+		},
+		save:function(e) {
+			e.preventDefault();
+			console.log(this.form);
 		}
 	}
 });
