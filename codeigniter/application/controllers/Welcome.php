@@ -45,14 +45,15 @@ class Welcome extends CI_Controller {
 				'usuario'=>"",
 				'contrasena'=>"",
 			);
+			$this->load->view('ci/formulario',$data);
 		}else{
-			$data["usuario_data"] = array(
-				'idusuario' =>0,
-				'usuario'=>"",
-				'contrasena'=>"",
-			);
+			$data["usuario_data"] = $this->Usuario->GetUser($id); // Retorna un objeto o un false, si es un false entra al else.
+			if ($data["usuario_data"]) {
+				$this->load->view('ci/formulario',$data);
+			}else{
+				redirect('/welcome/lista/'); // Si el id ingresado no existe lo regresamos a la lista.
+			}
 		}
-		$this->load->view('ci/formulario',$data);
 	}
 	public function Save($value='')
 	{

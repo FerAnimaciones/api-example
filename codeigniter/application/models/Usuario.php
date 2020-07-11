@@ -20,7 +20,7 @@ class Usuario extends CI_Model {
       return false;
     }
   }
-  public function GetUser($user="")
+  public function GetUser($user=0)
   {
     $db_connection = $this->load->database("default", TRUE);
     $query=$db_connection->query("select * from usuario where idusuario = $user");
