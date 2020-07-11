@@ -60,14 +60,14 @@ class Welcome extends CI_Controller {
 				'contrasena' =>$this->input->post("contrasena"),
 			);
 			switch ($this->input->post("idusuario")) {
-				case 0:
+				case 0: //Modo de insertar
 				if ($this->Usuario->Insert($item)) {
 					redirect('/welcome/lista/'); // Sirve para regresar a la funcion de lista o cualquier funcion dentro de el controlado que se agrega.
 				}else{
 
 				}
 				break;
-				default:
+				default: //Modo de actualizar.
 				if ($this->Usuario->Update($item,$this->input->post("idusuario"))) { //Enviamos Item y id del post.
 				}
 				redirect('/welcome/lista/');
