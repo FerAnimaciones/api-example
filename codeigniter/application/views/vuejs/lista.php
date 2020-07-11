@@ -138,7 +138,13 @@ var app = new Vue({
 					}
 					break;
 					case "update":
-
+					if (response.data.estatus) {
+						v.modo=0; //Volvemos atras.
+						v.resetForm();//Resetamos.
+						v.loadLista();//Refrescamos los datos.
+					}else{
+						console.error("Ocurrio un error.")
+					}
 					break;
 					default:
 					break;

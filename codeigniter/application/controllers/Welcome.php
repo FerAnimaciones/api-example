@@ -78,9 +78,10 @@ class Welcome extends CI_Controller {
 				break;
 				case 1:
 				$response["action"]="update";
-				if ($this->Usuario->Update($item,$data_post["idusario"])) { //Enviamos Item y id del post.
+				if ($this->Usuario->Update($item,$data_post["idusuario"])) { //Enviamos Item y id del post.
 					$response["estatus"]=true;
 				}
+				break;
 				default:
 				$response["action"]="error";
 				$response["estatus"]=false;

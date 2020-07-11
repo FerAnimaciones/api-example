@@ -48,7 +48,7 @@ class Usuario extends CI_Model {
   {
     if ($data!=null) {
       $db_connection = $this->load->database("default", TRUE);
-      $db_connection->where("idusario",$idusuario);
+      $db_connection->where("idusuario",$idusuario);
       $query=$db_connection->update('usuario',$data);
       if ($db_connection->affected_rows()) {
         return  true;
