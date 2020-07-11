@@ -11,6 +11,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				<h4>{{message}}</h4>
 				<div v-if="modo==0" class="table-container">
 					<button type="button"  v-on:click="formulario" class="btn btn-primary">FORMULARIO</button>
+					<button type="button"  v-on:click="loadLista" class="btn btn-primary">REFRESCAR TABLA</button>
 					<br><br>
 					<table class="table">
 						<thead>
@@ -38,6 +39,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							<input v-model="form.password" type="password" class="form-control" id="exampleInputPassword1">
 						</div>
 						<button type="submit" class="btn btn-primary">GUARDAR</button>
+						<button v-on:click="formulario"  type="button" class="btn btn-danger">CANCELAR</button>
 					</form>
 				</div>
 			</div>
@@ -81,11 +83,41 @@ var app = new Vue({
 			});
 		},
 		formulario:function() {
-			this.modo=1;
+			if (this.modo==0) {
+				this.modo=1;
+			}else{
+				this.modo=0;
+			}
 		},
 		save:function(e) {
 			e.preventDefault();
-			console.log(this.form);
+			let v=this;
+			axios.post('<?php echo site_url("welcome/save"); ?>',v.form)
+			.then(function (response) {
+				console.log(response);
+				switch (response.data.action) {
+					case "insert":
+					if (response.data.estatus) {
+						v.modo=0; //Volvemos atras.
+						v.form={
+							usuario:"",
+							password:"",
+						}; //Resetamos.
+						v.loadLista();//Refrescamos los datos.
+					}else{
+						console.error("Ocurrio un error.")
+					}
+					break;
+					case "update":
+
+					break;
+					default:
+					break;
+				}
+			})
+			.catch(function (error) {
+				console.log(error);
+			});
 		}
 	}
 });
