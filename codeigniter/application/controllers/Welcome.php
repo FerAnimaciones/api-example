@@ -76,10 +76,14 @@ class Welcome extends CI_Controller {
 			break;
 		}
 	}
-	public function Delete($id='')
+	public function Delete($id=0)
 	{
-		if ($this->Usuario->Delete($id)) {
-			redirect('/welcome/lista/');
+		if ($id!=0) {
+			if ($this->Usuario->Delete($id)) {
+				redirect('/welcome/lista/');
+			}else{
+				redirect('/welcome/lista/');
+			}
 		}else{
 			redirect('/welcome/lista/');
 		}
