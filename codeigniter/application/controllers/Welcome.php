@@ -40,9 +40,44 @@ class Welcome extends CI_Controller {
 	public function Formulario($id=0)
 	{
 		if ($id==0) {
-			$this->load->view('ci/formulario');
+			$data["usuario_data"] = array(
+				'idusuario' =>0,
+				'usuario'=>"",
+				'contrasena'=>"",
+			);
 		}else{
+			$data["usuario_data"] = array(
+				'idusuario' =>0,
+				'usuario'=>"",
+				'contrasena'=>"",
+			);
+		}
+		$this->load->view('ci/formulario',$data);
+	}
+	public function Save($value='')
+	{
+		switch ($this->input->method()) {
+			case 'post':
+			$item=array(
+				//'idusario' => 0, //No es necesario si es autoincrementable, contrario si fuera manual deberias calcular el siguiente.
+				'usuario' => $this->input->post("usuario"),
+				'contrasena' =>$this->input->post("contrasena"),
+			);
+			switch ($this->input->post("idusuario")) {
+				case 0:
+				if ($this->Usuario->Insert($item)) {
+					redirect('/welcome/lista/'); // Sirve para regresar a la funcion de lista o cualquier funcion dentro de el controlado que se agrega.
+				}else{
 
+				}
+				break;
+				default:
+				if ($this->Usuario->Update($item,$this->input->post("idusuario"))) { //Enviamos Item y id del post.
+				}
+				redirect('/welcome/lista/');
+				break;
+			}
+			break;
 		}
 	}
 	public function Vuejslista($value='')
