@@ -14,8 +14,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<div class="row">
 			<div class="col-md-6">
 				<h2>CODEIGTNER MODE</h2>
-				<a href="<?php echo site_url("welcome/lista"); ?>" type="button" class="btn btn-primary">Lista</a>
-				<a type="button" class="btn btn-primary">Formulario</a>
+				<a href="<?php echo site_url("welcome/lista"); ?>" type="button" class="btn btn-primary">Lista / Formulario</a>
 			</div>
 			<div class="col-md-6">
 				<h2>VueJS MODE</h2>

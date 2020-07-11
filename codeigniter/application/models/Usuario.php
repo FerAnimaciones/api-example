@@ -20,7 +20,7 @@ class Usuario extends CI_Model {
       return false;
     }
   }
-  public function GetUser($user="")
+  public function GetUser($user=0)
   {
     $db_connection = $this->load->database("default", TRUE);
     $query=$db_connection->query("select * from usuario where idusuario = $user");
@@ -50,6 +50,21 @@ class Usuario extends CI_Model {
       $db_connection = $this->load->database("default", TRUE);
       $db_connection->where("idusuario",$idusuario);
       $query=$db_connection->update('usuario',$data);
+      if ($db_connection->affected_rows()) {
+        return  true;
+      } else {
+        return false;
+      }
+    }else{
+      return false;
+    }
+  }
+  public function Delete($idusuario=0)
+  {
+    if ($idusuario!=0) {
+      $db_connection = $this->load->database("default", TRUE);
+      $db_connection->where("idusuario",$idusuario);
+      $query=$db_connection->delete('usuario');
       if ($db_connection->affected_rows()) {
         return  true;
       } else {

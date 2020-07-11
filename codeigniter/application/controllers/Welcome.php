@@ -23,6 +23,7 @@ class Welcome extends CI_Controller {
 		$this->load->model(array('Usuario'));
 		$this->load->helper(array('url','headers'));
 	}
+	// http://localhost/api-example/codeigniter/index.php/welcome/
 	public function index()
 	{
 		$this->load->view('welcome_message');
@@ -36,61 +37,55 @@ class Welcome extends CI_Controller {
 		}
 		$this->load->view('ci/lista',$data);
 	}
+	public function Formulario($id=0)
+	{
+		if ($id==0) {
+			$this->load->view('ci/formulario');
+		}else{
+			$data["usuario_data"] = $this->Usuario->GetUser($id); // Retorna un objeto o un false, si es un false entra al else.
+			if ($data["usuario_data"]) {
+				$this->load->view('ci/formulario_edit',$data); // Si hay datos los enviamos al formulario.
+			}else{
+				redirect('/welcome/lista/'); // Si el id ingresado no existe lo regresamos a la lista.
+			}
+		}
+	}
+	public function Save($value='')
+	{
+		switch ($this->input->method()) {
+			case 'post':
+			$item=array(
+				//'idusario' => 0, //No es necesario si es autoincrementable, contrario si fuera manual deberias calcular el siguiente.
+				'usuario' => $this->input->post("usuario"),
+				'contrasena' =>$this->input->post("contrasena"),
+			);
+			switch ($this->input->post("idusuario")) {
+				case 0: //Modo de insertar
+				if ($this->Usuario->Insert($item)) {
+					redirect('/welcome/lista/'); // Sirve para regresar a la funcion de lista o cualquier funcion dentro de el controlado que se agrega.
+				}else{
 
-	// --------------------------- AQUI INICIA VUEJS ----------------------------------------
+				}
+				break;
+				default: //Modo de actualizar.
+				if ($this->Usuario->Update($item,$this->input->post("idusuario"))) { //Enviamos Item y id del post.
+				}
+				redirect('/welcome/lista/');
+				break;
+			}
+			break;
+		}
+	}
+	public function Delete($id='')
+	{
+		if ($this->Usuario->Delete($id)) {
+			redirect('/welcome/lista/');
+		}else{
+			redirect('/welcome/lista/');
+		}
+	}
 	public function Vuejslista($value='')
 	{
 		$this->load->view('vuejs/lista');
-	}
-	public function Getlista($value='') {
-		HeaderJson();
-		switch ($this->input->method()) {
-			case 'get':
-			$response["total"]=0;
-			$response["lista"]=$this->Usuario->GetUsers();
-			if ($response["lista"]) {
-				$response["total"]=count($response["lista"]);
-			}
-			echo json_encode($response);
-			break;
-			default:
-			break;
-		}
-	}
-	public function Save($value='') {
-		HeaderJson();
-		switch ($this->input->method()) {
-			case 'post':
-			$data_post= json_decode(file_get_contents('php://input'), true);
-			//var_dumo($data_post); //<-- Con esto haces un debug a la variable. tambien puedes usar json para eso. <echo json_encode($data_post)>;
-			$item=array(
-				//'idusario' => 0, //No es necesario si es autoincrementable, contrario si fuera manual deberias calcular el siguiente.
-				'usuario' => $data_post["usuario"],
-				'contrasena' =>$data_post["password"] ,
-			);
-			$response["estatus"]=false;
-			switch ($data_post["modo"] ) {
-				case 0:
-				$response["action"]="insert";
-				if ($this->Usuario->Insert($item)) {
-					$response["estatus"]=true;
-				}
-				break;
-				case 1:
-				$response["action"]="update";
-				if ($this->Usuario->Update($item,$data_post["idusuario"])) { //Enviamos Item y id del post.
-					$response["estatus"]=true;
-				}
-				break;
-				default:
-				$response["action"]="error";
-				$response["estatus"]=false;
-				break;
-			}
-			echo json_encode($response);
-			break;
-			default:
-			break;
-		}
 	}
 }

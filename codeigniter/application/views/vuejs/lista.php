@@ -16,15 +16,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					<table class="table">
 						<thead>
 							<tr>
-								<th class="td-col">Nombre</th>
-								<th class="td-col">Password</th>
-								<th class="td-col">Opciones</th>
+								<th>Nombre</th>
+								<th>Password</th>
+								<th>Opciones</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr v-for="datos in lista">
-								<td class="td-col">{{datos.usuario}}</td>
-								<td class="td-col">{{datos.contrasena}}</td>
+								<td>{{datos.usuario}}</td>
+								<td>{{datos.contrasena}}</td>
 								<td>
 									<div class="dropdown">
 										<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -32,7 +32,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 										</button>
 										<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 											<button class="dropdown-item" v-on:click="formularioEditar(datos)">Editar</button>
-											<button class="dropdown-item">Eliminar</button>
+											<button class="dropdown-item" v-on:click="itemDelete(datos)">Eliminar</button>
 										</div>
 									</div>
 								</td>
@@ -83,7 +83,7 @@ var app = new Vue({
 	methods: {
 		loadLista: function () {
 			var v=this;
-			axios.get('<?php echo site_url("welcome/getlista"); ?>')
+			axios.get('<?php echo site_url("api/usuarios/getlista"); ?>')
 			.then(function (response) {
 				v.lista=response.data.lista;
 				console.log(response);
@@ -112,6 +112,15 @@ var app = new Vue({
 			}; //En este caso los datos ya estan cargados en vuejs, si necesitas cargar mas lo conveniente sera hacer un get con id y buscar todo lso datos.
 			this.modo=2;
 		},
+		itemDelete:function(item) {
+			this.form={
+				modo:2,
+				idusuario:item.idusuario,
+				usuario:item.usuario,
+				password:item.contrasena,
+			};
+			this.save();
+		},
 		resetForm:function() {
 			this.form={
 				modo:0,
@@ -120,11 +129,13 @@ var app = new Vue({
 				password:"",
 			};
 		},
-		save:function(e) {
-			e.preventDefault();
+		save:function(e=null) {
+			if (e!=null) {
+				e.preventDefault();
+			}
 			let v=this;
 			let url="";
-			axios.post('<?php echo site_url("welcome/save"); ?>',v.form)
+			axios.post('<?php echo site_url("api/usuarios/save"); ?>',v.form)
 			.then(function (response) {
 				console.log(response);
 				switch (response.data.action) {
@@ -138,6 +149,15 @@ var app = new Vue({
 					}
 					break;
 					case "update":
+					if (response.data.estatus) {
+						v.modo=0; //Volvemos atras.
+						v.resetForm();//Resetamos.
+						v.loadLista();//Refrescamos los datos.
+					}else{
+						console.error("Ocurrio un error.")
+					}
+					break;
+					case "delete":
 					if (response.data.estatus) {
 						v.modo=0; //Volvemos atras.
 						v.resetForm();//Resetamos.
