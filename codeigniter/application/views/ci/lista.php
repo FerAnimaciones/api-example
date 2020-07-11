@@ -12,15 +12,24 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<br>
 	<div class="container">
 		<div class="row">
-			<div class="col-md-6">
-				<h2>CODEIGTNER MODE</h2>
-				<a href="<?php echo site_url("welcome/lista"); ?>" type="button" class="btn btn-primary">Lista</a>
-				<a type="button" class="btn btn-primary">Formulario</a>
-			</div>
-			<div class="col-md-6">
-				<h2>VueJS MODE</h2>
-				<a href="<?php echo site_url("welcome/vuejslista"); ?>" type="button" class="btn btn-primary">Lista</a>
-				<a  type="button" class="btn btn-primary">Formulario</a>
+			<div class="col-md-12">
+				<h2>LISTA</h2>
+				<div>
+					<table class="table">
+						<thead>
+							<tr>
+								<th>Nombre</th>
+								<th>Password</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr v-for="datos in lista">
+								<td>{{datos.usuario}}</td>
+								<td>{{datos.contrasena}}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
 			</div>
 		</div>
 	</div>

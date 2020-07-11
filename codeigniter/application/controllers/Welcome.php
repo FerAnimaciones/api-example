@@ -27,6 +27,12 @@ class Welcome extends CI_Controller {
 	{
 		$this->load->view('welcome_message');
 	}
+	public function Lista($value='')
+	{
+		$this->load->view('vuejs/lista');
+	}
+
+	//AQUI INICIA VUEJS
 	public function Vuejslista($value='')
 	{
 		$this->load->view('vuejs/lista');
