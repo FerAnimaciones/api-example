@@ -21,14 +21,29 @@ class Welcome extends CI_Controller {
 	 public function __construct() {
 		 parent::__construct();
 		 $this->load->model(array('Usuario'));
-		 $this->load->helper(array('url'));
+		 $this->load->helper(array('url','headers'));
 	 }
 	public function index()
 	{
 		$this->load->view('welcome_message');
 	}
-	public function vuejslista($value='')
+	public function Vuejslista($value='')
 	{
 		$this->load->view('vuejs/lista');
+	}
+	public function Getlista($value='') {
+		HeaderJson();
+		switch ($this->input->method()) {
+			case 'get':
+			$response["total"]=0;
+			$response["lista"]=$this->Usuario->GetUsers();
+			if ($response["lista"]) {
+				$response["total"]=count($response["lista"]);
+			}
+			echo json_encode($response);
+			break;
+			default:
+			break;
+		}
 	}
 }

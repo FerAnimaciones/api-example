@@ -16,6 +16,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				<h2>LISTA</h2>
 				<div id="app">
 					<h4>{{message}}</h4>
+					<table class="table">
+						<thead>
+							<tr>
+								<th>Nombre</th>
+								<th>Password</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr v-for="datos in lista">
+								<td>{{datos.usuario}}</td>
+								<td>{{datos.contrasena}}</td>
+							</tr>
+						</tbody>
+					</table>
 				</div>
 			</div>
 		</div>
@@ -29,8 +43,29 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 var app = new Vue({
 	el: '#app',
 	data: {
-		message: 'Prueba'
+		message: 'Prueba',
+		lista:[],
+	},
+	created: function (){
+		this.loadLista();
+	},
+	methods: {
+		loadLista: function () {
+			var v=this;
+			axios.get('<?php echo site_url("welcome/getlista"); ?>')
+			.then(function (response) {
+				v.lista=response.data.lista;
+				console.log(response);
+			})
+			.catch(function (error) {
+
+				console.log(error);
+			})
+			.then(function () {
+
+			});
+		}
 	}
-})
+});
 </script>
 </html>
