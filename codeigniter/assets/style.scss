@@ -1,0 +1,50 @@
+[v-cloak] {
+  display: none;
+}
+.table-container {
+  height: calc(100vh - 21vh);
+}
+table {
+  display: flex;
+  flex-flow: column;
+  height: 100%;
+  width: 100%;
+  thead {
+    flex: 0 0 auto;
+    width: calc(100% - 0.9em);
+  }
+  tbody {
+    /* body takes all the remaining available space */
+    flex: 1 1 auto;
+    display: block;
+    overflow-y: scroll;
+  }
+}
+table tbody {
+  flex: 1 1 auto;
+  display: block;
+  overflow-y: scroll;
+}
+table tbody tr {
+  width: 100%;
+}
+table thead, table tbody tr {
+  display: table;
+  table-layout: fixed;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}

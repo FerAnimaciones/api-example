@@ -30,4 +30,33 @@ class Usuario extends CI_Model {
       return false;
     }
   }
+  public function Insert($data=null)
+  {
+    if ($data!=null) {
+      $db_connection = $this->load->database("default", TRUE);
+      $query=$db_connection->insert('usuario',$data);
+      if ($db_connection->affected_rows()) {
+        return  true;
+      } else {
+        return false;
+      }
+    }else{
+      return false;
+    }
+  }
+  public function Update($data=null,$idusuario=0)
+  {
+    if ($data!=null) {
+      $db_connection = $this->load->database("default", TRUE);
+      $db_connection->where("idusuario",$idusuario);
+      $query=$db_connection->update('usuario',$data);
+      if ($db_connection->affected_rows()) {
+        return  true;
+      } else {
+        return false;
+      }
+    }else{
+      return false;
+    }
+  }
 }
