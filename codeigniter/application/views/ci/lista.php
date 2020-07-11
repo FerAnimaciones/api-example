@@ -33,8 +33,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 													Opciones
 												</button>
 												<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-													<a class="dropdown-item" href="<?= site_url("welcome/save/").$value->idusuario ?>">Editar</a>
-													<a class="dropdown-item" href="<?= site_url("welcome/delete/").$value->idusuario ?>">Eliminar</a>
+													<a class="dropdown-item" href="<?= site_url("welcome/formulario/").$value->idusuario ?>">Editar</a>
+													<a class="dropdown-item" href="<?= site_url("welcome/formulario/").$value->idusuario ?>">Eliminar</a>
 												</div>
 											</div>
 										</td>
