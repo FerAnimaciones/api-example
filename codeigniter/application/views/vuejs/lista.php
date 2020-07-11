@@ -1,41 +1,34 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-?><!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="utf-8">
-	<title>TEST</title>
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-
-</head>
-<body>
-	<br>
-	<div class="container">
-		<div class="row">
-			<div class="col-md-12">
-				<h2>LISTA</h2>
-				<div id="app">
-					<h4>{{message}}</h4>
-					<table class="table">
-						<thead>
-							<tr>
-								<th>Nombre</th>
-								<th>Password</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr v-for="datos in lista">
-								<td>{{datos.usuario}}</td>
-								<td>{{datos.contrasena}}</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
+?>
+<?php $this->load->view("tools/header") ?>
+<br>
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<h2>LISTA</h2>
+			<div id="app" v-cloak>
+				<h4>{{message}}</h4>
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Nombre</th>
+							<th>Password</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr v-for="datos in lista">
+							<td>{{datos.usuario}}</td>
+							<td>{{datos.contrasena}}</td>
+						</tr>
+					</tbody>
+				</table>
 			</div>
 		</div>
 	</div>
-</body>
+</div>
 <?php $this->load->view("tools/scripts") ?>
+<!-- Area de scripts -->
 <script src="https://cdn.jsdelivr.net/npm/vue"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.1"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
@@ -68,4 +61,4 @@ var app = new Vue({
 	}
 });
 </script>
-</html>
+<?php $this->load->view("tools/footer_end") ?>
