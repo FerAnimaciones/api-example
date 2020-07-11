@@ -9,20 +9,22 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			<h2>LISTA</h2>
 			<div id="app" v-cloak>
 				<h4>{{message}}</h4>
-				<table class="table">
-					<thead>
-						<tr>
-							<th>Nombre</th>
-							<th>Password</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr v-for="datos in lista">
-							<td>{{datos.usuario}}</td>
-							<td>{{datos.contrasena}}</td>
-						</tr>
-					</tbody>
-				</table>
+				<div class="table-container">
+					<table class="table">
+						<thead>
+							<tr>
+								<th class="td-col">Nombre</th>
+								<th class="td-col">Password</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr v-for="datos in lista">
+								<td class="td-col">{{datos.usuario}}</td>
+								<td class="td-col">{{datos.contrasena}}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
 			</div>
 		</div>
 	</div>
