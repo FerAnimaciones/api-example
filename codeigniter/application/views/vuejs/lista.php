@@ -83,7 +83,7 @@ var app = new Vue({
 	methods: {
 		loadLista: function () {
 			var v=this;
-			axios.get('<?php echo site_url("welcome/getlista"); ?>')
+			axios.get('<?php echo site_url("api/usuarios/getlista"); ?>')
 			.then(function (response) {
 				v.lista=response.data.lista;
 				console.log(response);
@@ -131,11 +131,11 @@ var app = new Vue({
 		},
 		save:function(e=null) {
 			if (e!=null) {
-				 	e.preventDefault();
+				e.preventDefault();
 			}
 			let v=this;
 			let url="";
-			axios.post('<?php echo site_url("welcome/save"); ?>',v.form)
+			axios.post('<?php echo site_url("api/usuarios/save"); ?>',v.form)
 			.then(function (response) {
 				console.log(response);
 				switch (response.data.action) {

@@ -7,6 +7,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<div class="row">
 		<div class="col-md-12">
 			<h2>LISTA</h2>
+			<button type="button" class="btn btn-primary">FORMULARIO</button>
+			<br><br>
 			<div class="table-container">
 				<table class="table">
 					<thead>
