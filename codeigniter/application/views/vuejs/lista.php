@@ -18,12 +18,24 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							<tr>
 								<th class="td-col">Nombre</th>
 								<th class="td-col">Password</th>
+								<th class="td-col">Opciones</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr v-for="datos in lista">
 								<td class="td-col">{{datos.usuario}}</td>
 								<td class="td-col">{{datos.contrasena}}</td>
+								<td>
+									<div class="dropdown">
+										<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+											Opciones
+										</button>
+										<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+											<button class="dropdown-item" v-on:click="formularioEditar(datos)">Editar</button>
+											<button class="dropdown-item">Eliminar</button>
+										</div>
+									</div>
+								</td>
 							</tr>
 						</tbody>
 					</table>
@@ -59,6 +71,8 @@ var app = new Vue({
 		lista:[],
 		modo:0,
 		form:{
+			modo:0,
+			idusario:0,
 			usuario:"",
 			password:"",
 		}
@@ -89,9 +103,27 @@ var app = new Vue({
 				this.modo=0;
 			}
 		},
+		formularioEditar:function(item) {
+			this.form={
+				modo:1,
+				idusuario:item.idusuario,
+				usuario:item.usuario,
+				password:item.contrasena,
+			}; //En este caso los datos ya estan cargados en vuejs, si necesitas cargar mas lo conveniente sera hacer un get con id y buscar todo lso datos.
+			this.modo=2;
+		},
+		resetForm:function() {
+			this.form={
+				modo:0,
+				idusuario:0,
+				usuario:"",
+				password:"",
+			};
+		},
 		save:function(e) {
 			e.preventDefault();
 			let v=this;
+			let url="";
 			axios.post('<?php echo site_url("welcome/save"); ?>',v.form)
 			.then(function (response) {
 				console.log(response);
@@ -99,10 +131,7 @@ var app = new Vue({
 					case "insert":
 					if (response.data.estatus) {
 						v.modo=0; //Volvemos atras.
-						v.form={
-							usuario:"",
-							password:"",
-						}; //Resetamos.
+						v.resetForm();//Resetamos.
 						v.loadLista();//Refrescamos los datos.
 					}else{
 						console.error("Ocurrio un error.")

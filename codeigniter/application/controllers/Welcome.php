@@ -37,7 +37,7 @@ class Welcome extends CI_Controller {
 		$this->load->view('ci/lista',$data);
 	}
 
-	//AQUI INICIA VUEJS
+	// --------------------------- AQUI INICIA VUEJS ----------------------------------------
 	public function Vuejslista($value='')
 	{
 		$this->load->view('vuejs/lista');
@@ -62,15 +62,29 @@ class Welcome extends CI_Controller {
 		switch ($this->input->method()) {
 			case 'post':
 			$data_post= json_decode(file_get_contents('php://input'), true);
-			$insert=array(
+			//var_dumo($data_post); //<-- Con esto haces un debug a la variable. tambien puedes usar json para eso. <echo json_encode($data_post)>;
+			$item=array(
 				//'idusario' => 0, //No es necesario si es autoincrementable, contrario si fuera manual deberias calcular el siguiente.
 				'usuario' => $data_post["usuario"],
 				'contrasena' =>$data_post["password"] ,
 			);
-			$response["action"]="insert";
 			$response["estatus"]=false;
-			if ($this->Usuario->Insert($insert)) {
-				$response["estatus"]=true;
+			switch ($data_post["modo"] ) {
+				case 0:
+				$response["action"]="insert";
+				if ($this->Usuario->Insert($item)) {
+					$response["estatus"]=true;
+				}
+				break;
+				case 1:
+				$response["action"]="update";
+				if ($this->Usuario->Update($item,$data_post["idusario"])) { //Enviamos Item y id del post.
+					$response["estatus"]=true;
+				}
+				default:
+				$response["action"]="error";
+				$response["estatus"]=false;
+				break;
 			}
 			echo json_encode($response);
 			break;
