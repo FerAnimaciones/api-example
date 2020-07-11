@@ -23,6 +23,7 @@ class Welcome extends CI_Controller {
 		$this->load->model(array('Usuario'));
 		$this->load->helper(array('url','headers'));
 	}
+	// http://localhost/api-example/codeigniter/index.php/welcome/
 	public function index()
 	{
 		$this->load->view('welcome_message');
