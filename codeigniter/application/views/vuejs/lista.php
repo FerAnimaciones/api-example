@@ -12,18 +12,25 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<br>
 	<div class="container">
 		<div class="row">
-			<div class="col-md-6">
-				<h2>CODEIGTNER MODE</h2>
-				<a type="button" class="btn btn-primary">Lista</a>
-				<a type="button" class="btn btn-primary">Formulario</a>
-			</div>
-			<div class="col-md-6">
-				<h2>VueJS MODE</h2>
-				<a type="button" class="btn btn-primary">Lista</a>
-				<a href="<?php echo site_url("welcome/vuejslista"); ?>" type="button" class="btn btn-primary">Formulario</a>
+			<div class="col-md-12">
+				<h2>LISTA</h2>
+				<div id="app">
+					<h4>{{message}}</h4>
+				</div>
 			</div>
 		</div>
 	</div>
 </body>
 <?php $this->load->view("tools/scripts") ?>
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.1"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script type="text/javascript">
+var app = new Vue({
+	el: '#app',
+	data: {
+		message: 'Prueba'
+	}
+})
+</script>
 </html>

@@ -18,8 +18,17 @@ class Welcome extends CI_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
+	 public function __construct() {
+		 parent::__construct();
+		 $this->load->model(array('Usuario'));
+		 $this->load->helper(array('url'));
+	 }
 	public function index()
 	{
 		$this->load->view('welcome_message');
+	}
+	public function vuejslista($value='')
+	{
+		$this->load->view('vuejs/lista');
 	}
 }
