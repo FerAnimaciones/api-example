@@ -49,7 +49,7 @@ class Welcome extends CI_Controller {
 		}else{
 			$data["usuario_data"] = $this->Usuario->GetUser($id); // Retorna un objeto o un false, si es un false entra al else.
 			if ($data["usuario_data"]) {
-				$this->load->view('ci/formulario',$data);
+				$this->load->view('ci/formulario',$data); // Si hay datos los enviamos al formulario.
 			}else{
 				redirect('/welcome/lista/'); // Si el id ingresado no existe lo regresamos a la lista.
 			}

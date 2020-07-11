@@ -16,15 +16,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					<table class="table">
 						<thead>
 							<tr>
-								<th class="td-col">Nombre</th>
-								<th class="td-col">Password</th>
-								<th class="td-col">Opciones</th>
+								<th>Nombre</th>
+								<th>Password</th>
+								<th>Opciones</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr v-for="datos in lista">
-								<td class="td-col">{{datos.usuario}}</td>
-								<td class="td-col">{{datos.contrasena}}</td>
+								<td>{{datos.usuario}}</td>
+								<td>{{datos.contrasena}}</td>
 								<td>
 									<div class="dropdown">
 										<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
