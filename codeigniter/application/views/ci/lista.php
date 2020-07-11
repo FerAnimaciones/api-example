@@ -23,10 +23,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							</tr>
 						</thead>
 						<tbody>
-							<tr v-for="datos in lista">
-								<td>{{datos.usuario}}</td>
-								<td>{{datos.contrasena}}</td>
-							</tr>
+							<?php
+							if ($lista) {
+								foreach ($lista as $key => $value) {
+									?>
+									<tr>
+										<td><?= $value->usuario; ?></td>
+										<td><?= $value->contrasena; ?></td>
+									</tr>
+									<?php
+								}
+							}
+							?>
+
 						</tbody>
 					</table>
 				</div>

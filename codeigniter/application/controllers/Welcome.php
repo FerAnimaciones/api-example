@@ -29,7 +29,12 @@ class Welcome extends CI_Controller {
 	}
 	public function Lista($value='')
 	{
-		$this->load->view('vuejs/lista');
+		$data["total"]=0;
+		$data["lista"]=$this->Usuario->GetUsers();
+		if ($data["lista"]) {
+			$data["total"]=count($data["lista"]);
+		}
+		$this->load->view('ci/lista',$data);
 	}
 
 	//AQUI INICIA VUEJS
