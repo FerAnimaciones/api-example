@@ -37,6 +37,14 @@ class Welcome extends CI_Controller {
 		}
 		$this->load->view('ci/lista',$data);
 	}
+	public function Formulario($id=0)
+	{
+		if ($id==0) {
+			$this->load->view('ci/formulario');
+		}else{
+
+		}
+	}
 	public function Vuejslista($value='')
 	{
 		$this->load->view('vuejs/lista');
