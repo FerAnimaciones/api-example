@@ -76,6 +76,14 @@ class Welcome extends CI_Controller {
 			break;
 		}
 	}
+	public function Delete($id='')
+	{
+		if ($this->Usuario->Delete($id)) {
+			redirect('/welcome/lista/');
+		}else{
+			redirect('/welcome/lista/');
+		}
+	}
 	public function Vuejslista($value='')
 	{
 		$this->load->view('vuejs/lista');
