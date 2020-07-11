@@ -59,4 +59,19 @@ class Usuario extends CI_Model {
       return false;
     }
   }
+  public function Delete($idusuario=0)
+  {
+    if ($idusuario!=0) {
+      $db_connection = $this->load->database("default", TRUE);
+      $db_connection->where("idusuario",$idusuario);
+      $query=$db_connection->delete('usuario');
+      if ($db_connection->affected_rows()) {
+        return  true;
+      } else {
+        return false;
+      }
+    }else{
+      return false;
+    }
+  }
 }

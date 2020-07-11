@@ -83,6 +83,12 @@ class Welcome extends CI_Controller {
 					$response["estatus"]=true;
 				}
 				break;
+				case 2:
+				$response["action"]="delete";
+				if ($this->Usuario->Delete($data_post["idusuario"])) {
+					$response["estatus"]=true;
+				}
+				break;
 				default:
 				$response["action"]="error";
 				$response["estatus"]=false;

@@ -32,7 +32,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 										</button>
 										<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 											<button class="dropdown-item" v-on:click="formularioEditar(datos)">Editar</button>
-											<button class="dropdown-item">Eliminar</button>
+											<button class="dropdown-item" v-on:click="itemDelete(datos)">Eliminar</button>
 										</div>
 									</div>
 								</td>
@@ -112,6 +112,15 @@ var app = new Vue({
 			}; //En este caso los datos ya estan cargados en vuejs, si necesitas cargar mas lo conveniente sera hacer un get con id y buscar todo lso datos.
 			this.modo=2;
 		},
+		itemDelete:function(item) {
+			this.form={
+				modo:2,
+				idusuario:item.idusuario,
+				usuario:item.usuario,
+				password:item.contrasena,
+			};
+			this.save();
+		},
 		resetForm:function() {
 			this.form={
 				modo:0,
@@ -120,8 +129,10 @@ var app = new Vue({
 				password:"",
 			};
 		},
-		save:function(e) {
-			e.preventDefault();
+		save:function(e=null) {
+			if (e!=null) {
+				 	e.preventDefault();
+			}
 			let v=this;
 			let url="";
 			axios.post('<?php echo site_url("welcome/save"); ?>',v.form)
@@ -138,6 +149,15 @@ var app = new Vue({
 					}
 					break;
 					case "update":
+					if (response.data.estatus) {
+						v.modo=0; //Volvemos atras.
+						v.resetForm();//Resetamos.
+						v.loadLista();//Refrescamos los datos.
+					}else{
+						console.error("Ocurrio un error.")
+					}
+					break;
+					case "delete":
 					if (response.data.estatus) {
 						v.modo=0; //Volvemos atras.
 						v.resetForm();//Resetamos.
