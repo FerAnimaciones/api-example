@@ -64,7 +64,7 @@ class Welcome extends CI_Controller {
 				if ($this->Usuario->Insert($item)) {
 					redirect('/welcome/lista/'); // Sirve para regresar a la funcion de lista o cualquier funcion dentro de el controlado que se agrega.
 				}else{
-
+					redirect('/welcome/formulario/');
 				}
 				break;
 				default: //Modo de actualizar.
@@ -76,10 +76,14 @@ class Welcome extends CI_Controller {
 			break;
 		}
 	}
-	public function Delete($id='')
+	public function Delete($id=0)
 	{
-		if ($this->Usuario->Delete($id)) {
-			redirect('/welcome/lista/');
+		if ($id!=0) {
+			if ($this->Usuario->Delete($id)) {
+				redirect('/welcome/lista/');
+			}else{
+				redirect('/welcome/lista/');
+			}
 		}else{
 			redirect('/welcome/lista/');
 		}
